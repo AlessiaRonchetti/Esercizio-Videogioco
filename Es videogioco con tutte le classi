@@ -91,6 +91,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
         boolean i = true;
+        
 
         System.out.println("Benvenuto nel gioco! Scegli il tuo personaggio:");
         System.out.println("1. Mago");
@@ -101,7 +102,7 @@ public class Main {
 
         switch (sceltaPersonaggio) {
             case 1:
-                Mago mago = new Mago(50, 10, 10);
+                Mago mago = new Mago(20, 10, 10);
                 System.out.println("Hai scelto di essere un mago.");
 
                 while (i) {
@@ -124,7 +125,7 @@ public class Main {
                         System.out.println("Purtroppo nella difesa hai perso: " + puntiVitaPersi + " punti vita.");
                     }
 
-                    if (mago.getVita() <= 0) {
+                    if (mago.getVita() <= 0 || mago.getAttacco() <= 0 || mago.getDifesa() <=0) {
                         System.out.println("Mi dispiace sei morto.");
                         i = false;
                         break;
@@ -147,7 +148,7 @@ public class Main {
                         System.out.println("Purtroppo nella difesa hai perso: " + puntiVitaPersi + " punti vita.");
                     }
 
-                    if (mago.getVita() <= 0) {
+                    if (mago.getVita() <= 0 || mago.getAttacco() <= 0 || mago.getDifesa() <=0) {
                         System.out.println("Mi dispiace sei morto.");
                         i = false;
                         break;
@@ -171,7 +172,7 @@ public class Main {
                         
                     }
 
-                    if (mago.getVita() <= 0) {
+                    if (mago.getVita() <= 0 || mago.getAttacco() <= 0 || mago.getDifesa() <=0) {
                         System.out.println("Mi dispiace sei morto.");
                         i = false;
                         break;
@@ -211,7 +212,7 @@ public class Main {
                     System.out.println("Purtroppo nella difesa hai perso: " + puntiVitaPersi + " punti vita.");
                 }
 
-                if (ladro.getVita() <= 0) {
+                if (ladro.getVita() <= 0 || ladro.getAttacco() <= 0 || ladro.getDifesa() <=0) {
                     System.out.println("Mi dispiace sei morto.");
                     i = false;
                     break;
@@ -234,7 +235,7 @@ public class Main {
                     System.out.println("Purtroppo nella difesa hai perso: " + puntiVitaPersi + " punti vita.");
                 }
 
-                if (ladro.getVita() <= 0) {
+                if (ladro.getVita() <= 0 || ladro.getAttacco() <= 0 || ladro.getDifesa() <=0) {
                     System.out.println("Mi dispiace sei morto.");
                     i = false;
                     break;
@@ -257,7 +258,7 @@ public class Main {
                     System.out.println("Purtroppo nella difesa hai perso: " + puntiVitaPersi + " punti vita.");
                 }
 
-                if (ladro.getVita() <= 0) {
+                if (ladro.getVita() <= 0 || ladro.getAttacco() <= 0 || ladro.getDifesa() <=0) {
                     System.out.println("Mi dispiace sei morto.");
                     i = false;
                     break;
@@ -296,7 +297,7 @@ public class Main {
                     System.out.println("Purtroppo nella difesa hai perso: " + puntiVitaPersi + " punti vita.");
                 }
 
-                if (guerriero.getVita() <= 0) {
+                if (guerriero.getVita() <= 0 || guerriero.getAttacco() <= 0 || guerriero.getDifesa() <=0) {
                     System.out.println("Mi dispiace sei morto.");
                     i = false;
                     break;
@@ -319,7 +320,7 @@ public class Main {
                     System.out.println("Purtroppo nella difesa hai perso: " + puntiVitaPersi + " punti vita.");
                 }
 
-                if (guerriero.getVita() <= 0) {
+                if (guerriero.getVita() <= 0 || guerriero.getAttacco() <= 0 || guerriero.getDifesa() <=0) {
                     System.out.println("Mi dispiace sei morto.");
                     i = false;
                     break;
@@ -342,7 +343,7 @@ public class Main {
                     System.out.println("Purtroppo nella difesa hai perso: " + puntiVitaPersi + " punti vita.");
                 }
 
-                if (guerriero.getVita() <= 0) {
+                if (guerriero.getVita() <= 0 || guerriero.getAttacco() <= 0 || guerriero.getDifesa() <=0) {
                     System.out.println("Mi dispiace sei morto.");
                     i = false;
                     break;
@@ -362,6 +363,10 @@ public class Main {
     
         scanner.close();
     }
+
+    
+}
+
 
     
 }
