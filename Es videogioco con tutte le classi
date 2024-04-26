@@ -87,10 +87,12 @@ class Guerriero extends Personaggio {
 
 public class Main {
     
-    public static void main(String[] args) {
+ public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
         boolean i = true;
+        int danniInflitti = 0;
+        int puntiVitaPersi = 0;
         
 
         System.out.println("Benvenuto nel gioco! Scegli il tuo personaggio:");
@@ -102,7 +104,7 @@ public class Main {
 
         switch (sceltaPersonaggio) {
             case 1:
-                Mago mago = new Mago(20, 10, 10);
+                Mago mago = new Mago(20, 20, 10);
                 System.out.println("Hai scelto di essere un mago.");
 
                 while (i) {
@@ -111,25 +113,37 @@ public class Main {
                     System.out.println("Livello 1 - Entra nella grotta con i pipistrelli");
 
                     System.out.println("Vuoi attaccare il nemico o difenderti?");
-                    scanner.nextLine(); // Consuma il newline residuo
+                    scanner.nextLine(); 
                     String azione1 = scanner.nextLine();
 
+                  
                     if (azione1.equalsIgnoreCase("Attacco")) {
-                        int danniInflitti = mago.attacco();
+                        danniInflitti = mago.attacco();
                         System.out.println("Hai inflitto " + danniInflitti + " danni al nemico.");
-                        int puntiVitaPersi = random.nextInt(20);
-                        System.out.println("Purtroppo nell'attacco hai perso: " + puntiVitaPersi + " punti vita.");
+                        puntiVitaPersi = random.nextInt(20);
+                        int puntiVitaRimanenti = mago.getVita() - puntiVitaPersi;
+                        System.out.println("Purtroppo nell'attacco hai perso dei punti vita. Ti sono rimasti: " + puntiVitaRimanenti + " punti vita.");
+                        if (puntiVitaRimanenti <= 0 || mago.getAttacco() <= 0 || mago.getDifesa() <=0) {
+                            System.out.println("Mi dispiace sei morto.");
+                            i = false;
+                            break;
+                        }
                     } else if (azione1.equalsIgnoreCase("Difesa")) {
-                        System.out.println("Ti sei difeso con successo dagli attacchi del nemico. La tua difesa è ora " + mago.difesa() + ".");
-                        int puntiVitaPersi = random.nextInt(20);
-                        System.out.println("Purtroppo nella difesa hai perso: " + puntiVitaPersi + " punti vita.");
+                       int  puntiDifesaRimasti = mago.difesa();
+                        System.out.println("Ti sei difeso con successo dagli attacchi del nemico. La tua difesa è ora " + puntiDifesaRimasti + ".");
+                         puntiVitaPersi = random.nextInt(20);
+                        int puntiVitaRimanenti = mago.getVita() - puntiVitaPersi;
+                        System.out.println("Purtroppo nella difesa hai perso dei punti vita. Ti sono rimasti: " + puntiVitaRimanenti + " punti vita.");
+
+                        if (puntiVitaRimanenti <= 0 || mago.getAttacco() <= 0 || mago.getDifesa() <=0) {
+                            System.out.println("Mi dispiace sei morto.");
+                            i = false;
+                            break;
+                        }
                     }
 
-                    if (mago.getVita() <= 0 || mago.getAttacco() <= 0 || mago.getDifesa() <=0) {
-                        System.out.println("Mi dispiace sei morto.");
-                        i = false;
-                        break;
-                    }
+
+                    
 
                     System.out.println("Livello 2 - Incontra il lupo mannaro.");
                     
@@ -137,22 +151,32 @@ public class Main {
                     System.out.println("Vuoi attaccare il nemico o difenderti?");
                     String azione2 = scanner.nextLine();
 
+                 
                     if (azione2.equalsIgnoreCase("Attacco")) {
-                        int danniInflitti = mago.attacco();
+                         danniInflitti = mago.attacco();
                         System.out.println("Hai inflitto " + danniInflitti + " danni al nemico.");
-                        int puntiVitaPersi = random.nextInt(20);
-                        System.out.println("Purtroppo nell'attacco hai perso: " + puntiVitaPersi + " punti vita.");
+                        puntiVitaPersi = random.nextInt(20);
+                        int puntiVitaRimanenti = mago.getVita() - puntiVitaPersi;
+                        System.out.println("Purtroppo nell'attacco hai perso dei punti vita. Ti sono rimasti: " + puntiVitaRimanenti + " punti vita.");
+                        if (puntiVitaRimanenti <= 0 || mago.getAttacco() <= 0 || mago.getDifesa() <=0) {
+                            System.out.println("Mi dispiace sei morto.");
+                            i = false;
+                            break;
+                        }
                     } else if (azione2.equalsIgnoreCase("Difesa")) {
                         System.out.println("Ti sei difeso con successo dagli attacchi del nemico. La tua difesa è ora " + mago.difesa() + ".");
-                        int puntiVitaPersi = random.nextInt(20);
-                        System.out.println("Purtroppo nella difesa hai perso: " + puntiVitaPersi + " punti vita.");
+                         puntiVitaPersi = random.nextInt(20);
+                        int puntiVitaRimanenti = mago.getVita() - puntiVitaPersi;
+                        System.out.println("Purtroppo nella difesa hai perso dei punti vita. Ti sono rimasti: " + puntiVitaRimanenti + " punti vita.");
+                        if (puntiVitaRimanenti <= 0 || mago.getAttacco() <= 0 || mago.getDifesa() <=0) {
+                            System.out.println("Mi dispiace sei morto.");
+                            i = false;
+                            break;
+                        }
                     }
 
-                    if (mago.getVita() <= 0 || mago.getAttacco() <= 0 || mago.getDifesa() <=0) {
-                        System.out.println("Mi dispiace sei morto.");
-                        i = false;
-                        break;
-                    }
+
+                   
 
                     System.out.println("Livello 3 - Incontra il boss finale Mirko.");
                   
@@ -161,34 +185,41 @@ public class Main {
                     String azione3 = scanner.nextLine();
 
                     if (azione3.equalsIgnoreCase("Attacco")) {
-                        int danniInflitti = mago.attacco();
-                        System.out.println("Hai inflitto " + danniInflitti + " danni a Mirko.");
-                        int puntiVitaPersi = random.nextInt(20);
-                        System.out.println("Purtroppo nell'attacco hai perso: " + puntiVitaPersi + " punti vita.");
+                         danniInflitti = mago.attacco();
+                        System.out.println("Hai inflitto " + danniInflitti + " danni al nemico.");
+                         puntiVitaPersi = random.nextInt(20);
+                        int puntiVitaRimanenti = mago.getVita() - puntiVitaPersi;
+                        System.out.println("Purtroppo nell'attacco hai perso dei punti vita. Ti sono rimasti: " + puntiVitaRimanenti + " punti vita.");
+                        if (puntiVitaRimanenti <= 0 || mago.getAttacco() <= 0 || mago.getDifesa() <=0) {
+                            System.out.println("Mi dispiace sei morto.");
+                            i = false;
+                            break;
+                        }
                     } else if (azione3.equalsIgnoreCase("Difesa")) {
-                        System.out.println("Ti sei difeso con successo dagli attacchi di Mirko. La tua difesa è ora " + mago.difesa() + ".");
-                        int puntiVitaPersi = random.nextInt(20);
-                        System.out.println("Purtroppo nella difesa hai perso: " + puntiVitaPersi + " punti vita.");
-                        
+                        System.out.println("Ti sei difeso con successo dagli attacchi del nemico. La tua difesa è ora " + mago.difesa() + ".");
+                        puntiVitaPersi = random.nextInt(20);
+                        int puntiVitaRimanenti = mago.getVita() - puntiVitaPersi;
+                        System.out.println("Purtroppo nella difesa hai perso dei punti vita. Ti sono rimasti: " + puntiVitaRimanenti + " punti vita.");
+                        if (puntiVitaRimanenti <= 0 || mago.getAttacco() <= 0 || mago.getDifesa() <=0) {
+                            System.out.println("Mi dispiace sei morto.");
+                            i = false;
+                            break;
+                        }
                     }
 
-                    if (mago.getVita() <= 0 || mago.getAttacco() <= 0 || mago.getDifesa() <=0) {
-                        System.out.println("Mi dispiace sei morto.");
-                        i = false;
-                        break;
-                    } else{
+                
                         System.out.println("Complimenti, sei arrivato alla fine del gioco!");
                         i = false;
                         break;
                     }
-                }
+                
 
                 break;
         
     
             
         case 2:
-            Ladro ladro = new Ladro(30, 12, 8);
+            Ladro ladro = new Ladro(10, 12, 8);
             System.out.println("Hai scelto di essere un ladro.");
 
 
@@ -198,25 +229,33 @@ public class Main {
                 System.out.println("Livello 1 - Entra nella grotta con i pipistrelli");
 
                 System.out.println("Vuoi attaccare il nemico o difenderti?");
-                scanner.nextLine(); // Consuma il newline residuo
+                scanner.nextLine(); 
                 String azione1 = scanner.nextLine();
 
                 if (azione1.equalsIgnoreCase("Attacco")) {
-                    int danniInflitti = ladro.attacco();
+                     danniInflitti = ladro.attacco();
                     System.out.println("Hai inflitto " + danniInflitti + " danni al nemico.");
-                    int puntiVitaPersi = random.nextInt(20);
-                    System.out.println("Purtroppo nell'attacco hai perso: " + puntiVitaPersi + " punti vita.");
+                     puntiVitaPersi = random.nextInt(20);
+                    int puntiVitaRimanenti = ladro.getVita() - puntiVitaPersi;
+                    System.out.println("Purtroppo nell'attacco hai perso dei punti vita. Ti sono rimasti: " + puntiVitaRimanenti + " punti vita.");
+                    if (puntiVitaRimanenti <= 0 || ladro.getAttacco() <= 0 || ladro.getDifesa() <=0) {
+                        System.out.println("Mi dispiace sei morto.");
+                        i = false;
+                        break;
+                    }
                 } else if (azione1.equalsIgnoreCase("Difesa")) {
                     System.out.println("Ti sei difeso con successo dagli attacchi del nemico. La tua difesa è ora " + ladro.difesa() + ".");
-                    int puntiVitaPersi = random.nextInt(20);
-                    System.out.println("Purtroppo nella difesa hai perso: " + puntiVitaPersi + " punti vita.");
+                    puntiVitaPersi = random.nextInt(20);
+                    int puntiVitaRimanenti = ladro.getVita() - puntiVitaPersi;
+                    System.out.println("Purtroppo nella difesa hai perso dei punti vita. Ti sono rimasti: " + puntiVitaRimanenti + " punti vita.");
+                    if (puntiVitaRimanenti <= 0 || ladro.getAttacco() <= 0 || ladro.getDifesa() <=0) {
+                        System.out.println("Mi dispiace sei morto.");
+                        i = false;
+                        break;
+                    }
                 }
 
-                if (ladro.getVita() <= 0 || ladro.getAttacco() <= 0 || ladro.getDifesa() <=0) {
-                    System.out.println("Mi dispiace sei morto.");
-                    i = false;
-                    break;
-                }
+                
 
                 System.out.println("Livello 2 - Incontra il lupo mannaro.");
                 
@@ -225,21 +264,30 @@ public class Main {
                 String azione2 = scanner.nextLine();
 
                 if (azione2.equalsIgnoreCase("Attacco")) {
-                    int danniInflitti = ladro.attacco();
+                     danniInflitti = ladro.attacco();
                     System.out.println("Hai inflitto " + danniInflitti + " danni al nemico.");
-                    int puntiVitaPersi = random.nextInt(20);
-                    System.out.println("Purtroppo nell'attacco hai perso: " + puntiVitaPersi + " punti vita.");
+                     puntiVitaPersi = random.nextInt(20);
+                    int puntiVitaRimanenti = ladro.getVita() - puntiVitaPersi;
+                    System.out.println("Purtroppo nell'attacco hai perso dei punti vita. Ti sono rimasti: " + puntiVitaRimanenti + " punti vita.");
+                    if (puntiVitaRimanenti <= 0 || ladro.getAttacco() <= 0 || ladro.getDifesa() <=0) {
+                        System.out.println("Mi dispiace sei morto.");
+                        i = false;
+                        break;
+                    }
                 } else if (azione2.equalsIgnoreCase("Difesa")) {
                     System.out.println("Ti sei difeso con successo dagli attacchi del nemico. La tua difesa è ora " + ladro.difesa() + ".");
-                    int puntiVitaPersi = random.nextInt(20);
-                    System.out.println("Purtroppo nella difesa hai perso: " + puntiVitaPersi + " punti vita.");
+                   puntiVitaPersi = random.nextInt(20);
+                    int puntiVitaRimanenti = ladro.getVita() - puntiVitaPersi;
+                    System.out.println("Purtroppo nella difesa hai perso dei punti vita. Ti sono rimasti: " + puntiVitaRimanenti + " punti vita.");
+                    if (puntiVitaRimanenti <= 0 || ladro.getAttacco() <= 0 || ladro.getDifesa() <=0) {
+                        System.out.println("Mi dispiace sei morto.");
+                        i = false;
+                        break;
+                    }
                 }
 
-                if (ladro.getVita() <= 0 || ladro.getAttacco() <= 0 || ladro.getDifesa() <=0) {
-                    System.out.println("Mi dispiace sei morto.");
-                    i = false;
-                    break;
-                }
+
+               
 
                 System.out.println("Livello 3 - Incontra il boss finale Mirko.");
               
@@ -248,25 +296,32 @@ public class Main {
                 String azione3 = scanner.nextLine();
 
                 if (azione3.equalsIgnoreCase("Attacco")) {
-                    int danniInflitti = ladro.attacco();
-                    System.out.println("Hai inflitto " + danniInflitti + " danni a Mirko.");
-                    int puntiVitaPersi = random.nextInt(20);
-                    System.out.println("Purtroppo nell'attacco hai perso: " + puntiVitaPersi + " punti vita.");
+                     danniInflitti = ladro.attacco();
+                    System.out.println("Hai inflitto " + danniInflitti + " danni al nemico.");
+                     puntiVitaPersi = random.nextInt(20);
+                    int puntiVitaRimanenti = ladro.getVita() - puntiVitaPersi;
+                    System.out.println("Purtroppo nell'attacco hai perso dei punti vita. Ti sono rimasti: " + puntiVitaRimanenti + " punti vita.");
+                    if (puntiVitaRimanenti <= 0 || ladro.getAttacco() <= 0 || ladro.getDifesa() <=0) {
+                        System.out.println("Mi dispiace sei morto.");
+                        i = false;
+                        break;
+                    }
                 } else if (azione3.equalsIgnoreCase("Difesa")) {
-                    System.out.println("Ti sei difeso con successo dagli attacchi di Mirko. La tua difesa è ora " + ladro.difesa() + ".");
-                    int puntiVitaPersi = random.nextInt(20);
-                    System.out.println("Purtroppo nella difesa hai perso: " + puntiVitaPersi + " punti vita.");
+                    System.out.println("Ti sei difeso con successo dagli attacchi del nemico. La tua difesa è ora " + ladro.difesa() + ".");
+                    puntiVitaPersi = random.nextInt(20);
+                    int puntiVitaRimanenti = ladro.getVita() - puntiVitaPersi;
+                    System.out.println("Purtroppo nella difesa hai perso dei punti vita. Ti sono rimasti: " + puntiVitaRimanenti + " punti vita.");
+                    if (puntiVitaRimanenti <= 0 || ladro.getAttacco() <= 0 || ladro.getDifesa() <=0) {
+                        System.out.println("Mi dispiace sei morto.");
+                        i = false;
+                        break;
+                    }
                 }
 
-                if (ladro.getVita() <= 0 || ladro.getAttacco() <= 0 || ladro.getDifesa() <=0) {
-                    System.out.println("Mi dispiace sei morto.");
-                    i = false;
-                    break;
-                }else{
                     System.out.println("Complimenti, sei arrivato alla fine del gioco!");
                     i = false;
                     break;
-                }
+                
             }
 
             break;
@@ -283,25 +338,33 @@ public class Main {
                 System.out.println("Livello 1 - Entra nella grotta con i pipistrelli");
 
                 System.out.println("Vuoi attaccare il nemico o difenderti?");
-                scanner.nextLine(); // Consuma il newline residuo
+                scanner.nextLine(); 
                 String azione1 = scanner.nextLine();
 
                 if (azione1.equalsIgnoreCase("Attacco")) {
-                    int danniInflitti = guerriero.attacco();
+                     danniInflitti = guerriero.attacco();
                     System.out.println("Hai inflitto " + danniInflitti + " danni al nemico.");
-                    int puntiVitaPersi = random.nextInt(20);
-                    System.out.println("Purtroppo nell'attacco hai perso: " + puntiVitaPersi + " punti vita.");
+                     puntiVitaPersi = random.nextInt(20);
+                    int puntiVitaRimanenti = guerriero.getVita() - puntiVitaPersi;
+                    System.out.println("Purtroppo nell'attacco hai perso dei punti vita. Ti sono rimasti: " + puntiVitaRimanenti + " punti vita.");
+                    if (puntiVitaRimanenti <= 0 || guerriero.getAttacco() <= 0 || guerriero.getDifesa() <=0) {
+                        System.out.println("Mi dispiace sei morto.");
+                        i = false;
+                        break;
+                    }
                 } else if (azione1.equalsIgnoreCase("Difesa")) {
                     System.out.println("Ti sei difeso con successo dagli attacchi del nemico. La tua difesa è ora " + guerriero.difesa() + ".");
-                    int puntiVitaPersi = random.nextInt(20);
-                    System.out.println("Purtroppo nella difesa hai perso: " + puntiVitaPersi + " punti vita.");
+                     puntiVitaPersi = random.nextInt(20);
+                    int puntiVitaRimanenti = guerriero.getVita() - puntiVitaPersi;
+                    System.out.println("Purtroppo nella difesa hai perso dei punti vita. Ti sono rimasti: " + puntiVitaRimanenti + " punti vita.");  if (puntiVitaRimanenti <= 0 || guerriero.getAttacco() <= 0 || guerriero.getDifesa() <=0) {
+                        System.out.println("Mi dispiace sei morto.");
+                        i = false;
+                        break;
+                    }
+
                 }
 
-                if (guerriero.getVita() <= 0 || guerriero.getAttacco() <= 0 || guerriero.getDifesa() <=0) {
-                    System.out.println("Mi dispiace sei morto.");
-                    i = false;
-                    break;
-                }
+               
 
                 System.out.println("Livello 2 - Incontra il lupo mannaro.");
                 
@@ -310,22 +373,29 @@ public class Main {
                 String azione2 = scanner.nextLine();
 
                 if (azione2.equalsIgnoreCase("Attacco")) {
-                    int danniInflitti = guerriero.attacco();
+                     danniInflitti = guerriero.attacco();
                     System.out.println("Hai inflitto " + danniInflitti + " danni al nemico.");
-                    int puntiVitaPersi = random.nextInt(20);
-                    System.out.println("Purtroppo nell'attacco hai perso: " + puntiVitaPersi + " punti vita.");
+                     puntiVitaPersi = random.nextInt(20);
+                    int puntiVitaRimanenti = guerriero.getVita() - puntiVitaPersi;
+                    System.out.println("Purtroppo nell'attacco hai perso dei punti vita. Ti sono rimasti: " + puntiVitaRimanenti + " punti vita.");
+                    if (puntiVitaRimanenti <= 0 || guerriero.getAttacco() <= 0 || guerriero.getDifesa() <=0) {
+                        System.out.println("Mi dispiace sei morto.");
+                        i = false;
+                        break;
+                    }
                 } else if (azione2.equalsIgnoreCase("Difesa")) {
                     System.out.println("Ti sei difeso con successo dagli attacchi del nemico. La tua difesa è ora " + guerriero.difesa() + ".");
-                    int puntiVitaPersi = random.nextInt(20);
-                    System.out.println("Purtroppo nella difesa hai perso: " + puntiVitaPersi + " punti vita.");
+                     puntiVitaPersi = random.nextInt(20);
+                    int puntiVitaRimanenti = guerriero.getVita() - puntiVitaPersi;
+                    System.out.println("Purtroppo nella difesa hai perso dei punti vita. Ti sono rimasti: " + puntiVitaRimanenti + " punti vita.");
+                    if (puntiVitaRimanenti <= 0 || guerriero.getAttacco() <= 0 || guerriero.getDifesa() <=0) {
+                        System.out.println("Mi dispiace sei morto.");
+                        i = false;
+                        break;
+                    }
                 }
 
-                if (guerriero.getVita() <= 0 || guerriero.getAttacco() <= 0 || guerriero.getDifesa() <=0) {
-                    System.out.println("Mi dispiace sei morto.");
-                    i = false;
-                    break;
-                }
-
+              
                 System.out.println("Livello 3 - Incontra il boss finale Mirko.");
               
 
@@ -333,26 +403,34 @@ public class Main {
                 String azione3 = scanner.nextLine();
 
                 if (azione3.equalsIgnoreCase("Attacco")) {
-                    int danniInflitti = guerriero.attacco();
-                    System.out.println("Hai inflitto " + danniInflitti + " danni a Mirko.");
-                    int puntiVitaPersi = random.nextInt(20);
-                    System.out.println("Purtroppo nell'attacco hai perso: " + puntiVitaPersi + " punti vita.");
+                     danniInflitti = guerriero.attacco();
+                    System.out.println("Hai inflitto " + danniInflitti + " danni al nemico.");
+                     puntiVitaPersi = random.nextInt(20);
+                    int puntiVitaRimanenti = guerriero.getVita() - puntiVitaPersi;
+                    System.out.println("Purtroppo nell'attacco hai perso dei punti vita. Ti sono rimasti: " + puntiVitaRimanenti + " punti vita.");
+                    if (puntiVitaRimanenti <= 0 || guerriero.getAttacco() <= 0 || guerriero.getDifesa() <=0) {
+                        System.out.println("Mi dispiace sei morto.");
+                        i = false;
+                        break;
+                    }
                 } else if (azione3.equalsIgnoreCase("Difesa")) {
-                    System.out.println("Ti sei difeso con successo dagli attacchi di Mirko. La tua difesa è ora " + guerriero.difesa() + ".");
-                    int puntiVitaPersi = random.nextInt(20);
-                    System.out.println("Purtroppo nella difesa hai perso: " + puntiVitaPersi + " punti vita.");
+                    System.out.println("Ti sei difeso con successo dagli attacchi del nemico. La tua difesa è ora " + guerriero.difesa() + ".");
+                    puntiVitaPersi = random.nextInt(20);
+                    int puntiVitaRimanenti = guerriero.getVita() - puntiVitaPersi;
+                    System.out.println("Purtroppo nella difesa hai perso dei punti vita. Ti sono rimasti: " + puntiVitaRimanenti + " punti vita.");
+                    if (puntiVitaRimanenti <= 0 || guerriero.getAttacco() <= 0 || guerriero.getDifesa() <=0) {
+                        System.out.println("Mi dispiace sei morto.");
+                        i = false;
+                        break;
+                    }
                 }
 
-                if (guerriero.getVita() <= 0 || guerriero.getAttacco() <= 0 || guerriero.getDifesa() <=0) {
-                    System.out.println("Mi dispiace sei morto.");
-                    i = false;
-                    break;
-                }else{
+              
                     System.out.println("Complimenti, sei arrivato alla fine del gioco!");
                     i = false;
                     break;
                 }
-            }
+            
             
                 break;
             default:
@@ -367,6 +445,3 @@ public class Main {
     
 }
 
-
-    
-}
